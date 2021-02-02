@@ -12,11 +12,9 @@ public interface ProductMapper {
     Product requestToEntity(ProductRequest dto);
 
 
-    @Mapping(target = "photoLink", ignore = true)
     @Mapping(target = "id", ignore = true)
     Product requestToEntity(ProductRequest dto, @MappingTarget Product product);
 
 
-    @Mapping(target = "photoLink", ignore = true)
     ProductResponse toDtoResponse(Product entity);
 }

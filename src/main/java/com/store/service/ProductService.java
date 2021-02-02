@@ -13,5 +13,7 @@ public interface ProductService {
 
     ProductResponse saveProduct(ProductRequest product);
 
-    ProductResponse updateProduct(ProductRequest product);
+    ProductResponse update(Long id, ProductRequest productRequest);
+
+    void deleteProductById(Long id);
 }

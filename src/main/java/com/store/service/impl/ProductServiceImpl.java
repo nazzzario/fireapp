@@ -8,6 +8,7 @@ import com.store.repository.ProductRepository;
 import com.store.service.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class ProductServiceImpl implements ProductService {
 
     private ProductRepository productRepository;
@@ -45,7 +47,17 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductResponse updateProduct(ProductRequest productRequest) {
-        return null;
+    public ProductResponse update(Long id, ProductRequest productRequest) {
+        Product product = productRepository.findById(id).orElseThrow(NullPointerException::new);
+        Product updated = productMapper.requestToEntity(productRequest, product);
+        return productMapper.toDtoResponse(productRepository.save(updated));
+    }
+
+
+    @Override
+    public void deleteProductById(Long id) {
+        productRepository.findById(id)
+                .orElseThrow(NullPointerException::new);
+        productRepository.deleteById(id);
     }
 }
