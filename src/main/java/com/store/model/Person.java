@@ -33,6 +33,7 @@ public class Person {
 
     private Boolean active;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @PrePersist
