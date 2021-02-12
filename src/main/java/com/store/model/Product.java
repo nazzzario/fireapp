@@ -3,6 +3,8 @@ package com.store.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -11,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product")
 @EqualsAndHashCode
-public class Product {
+public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,4 +30,8 @@ public class Product {
 
     @Column(name = "photo_link", nullable = false)
     private String photoLink;
+
+    @OneToMany(mappedBy = "person")
+    private Set<Order> orders;
+
 }

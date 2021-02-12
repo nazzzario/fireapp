@@ -13,9 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/")
-
 public class ProductController {
-
     private final ProductService productService;
 
     @Autowired
@@ -52,5 +50,4 @@ public class ProductController {
     public ProductResponse updateProduct(@PathVariable Long id, @RequestBody ProductRequest productRequest){
         return productService.update(id, productRequest);
     }
-
 }
